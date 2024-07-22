@@ -11,11 +11,10 @@ pub fn jump(x: f64, args: &AccelArgs) -> f64 {
 }
 
 fn jump_legacy(x: f64, args: &AccelArgs) -> f64 {
-    let step: Vec2;
     let smooth_rate: f64;
 
     //jump_base
-    step = Vec2 {
+    let step = Vec2 {
         x: args.cap.x,
         y: args.cap.y - 1.0,
     };
@@ -40,11 +39,10 @@ fn jump_legacy(x: f64, args: &AccelArgs) -> f64 {
 }
 
 fn jump_gain(x: f64, args: &AccelArgs) -> f64 {
-    let step: Vec2;
     let smooth_rate: f64;
 
     //jump_base
-    step = Vec2 {
+    let step = Vec2 {
         x: args.cap.x,
         y: args.cap.y - 1.0,
     };
