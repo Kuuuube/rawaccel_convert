@@ -30,7 +30,7 @@ fn classic_legacy(x: f64, args: &AccelArgs) -> f64 {
 
     //classic
     match args.cap_mode {
-        CapMode::inputoutput => {
+        CapMode::InputOutput => {
             cap = args.cap.y - 1.0;
 
             if cap < 0.0 {
@@ -44,14 +44,14 @@ fn classic_legacy(x: f64, args: &AccelArgs) -> f64 {
                 accel_raised = f64::powf(a, exponent_classic - 1.0);
             }
         }
-        CapMode::input => {
+        CapMode::Input => {
             accel_raised = f64::powf(args.acceleration, args.exponent_classic - 1.0);
             if args.cap.x > 0.0 {
                 let new_cap = base_fn(args.cap.x, accel_raised, args);
                 cap = new_cap;
             }
         }
-        CapMode::output => {
+        CapMode::Output => {
             accel_raised = f64::powf(args.acceleration, args.exponent_classic - 1.0);
 
             if args.cap.y > 0.0 {
@@ -83,7 +83,7 @@ fn classic_gain(x: f64, args: &AccelArgs) -> f64 {
 
     //classic
     match args.cap_mode {
-        CapMode::inputoutput => {
+        CapMode::InputOutput => {
             cap.x = args.cap.x;
             cap.y = args.cap.y - 1.0;
 
@@ -98,7 +98,7 @@ fn classic_gain(x: f64, args: &AccelArgs) -> f64 {
             }
             constant = (base_fn(cap.x, accel_raised, args) - cap.y) * cap.x;
         }
-        CapMode::input => {
+        CapMode::Input => {
             accel_raised = f64::powf(args.acceleration, args.exponent_classic - 1.0);
             if args.cap.x > 0.0 {
                 cap.x = args.cap.x;
@@ -111,7 +111,7 @@ fn classic_gain(x: f64, args: &AccelArgs) -> f64 {
                 constant = (base_fn(cap.x, accel_raised, args) - cap.y) * cap.x;
             }
         }
-        CapMode::output => {
+        CapMode::Output => {
             accel_raised = f64::powf(args.acceleration, args.exponent_classic - 1.0);
 
             if args.cap.y > 0.0 {

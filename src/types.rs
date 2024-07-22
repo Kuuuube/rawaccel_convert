@@ -42,7 +42,7 @@ impl Default for AccelArgs {
             smooth: 0.5,
             //{x: input_cap, y: output_cap}
             cap: Vec2 { x: 15.0, y: 1.5 },
-            cap_mode: CapMode::output,
+            cap_mode: CapMode::Output,
             length: 0,
             data: vec![],
         }
@@ -68,7 +68,7 @@ pub enum AccelMode {
 
 #[derive(Debug, Clone)]
 pub enum CapMode {
-    inputoutput,
-    input,
-    output,
+    InputOutput,
+    Input,
+    Output,
 }
