@@ -1,6 +1,7 @@
+use accel_curves::classic;
 use types::AccelArgs;
 
-mod classic;
+mod accel_curves;
 mod types;
 mod utility;
 
