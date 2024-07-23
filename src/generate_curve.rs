@@ -6,7 +6,7 @@ use crate::{
 
 pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
     let curve_steps = match args.point_scaling {
-        PointScaling::Libinput => libinput_step_maker(),
+        PointScaling::Libinput | PointScaling::LibinputDebug => libinput_step_maker(),
         _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
     };
     let mut curve_outputs: Vec<Point> = vec![];
@@ -25,7 +25,7 @@ pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
         });
     }
     match args.point_scaling {
-        PointScaling::Velocity | PointScaling::Libinput => {
+        PointScaling::Velocity | PointScaling::Libinput | PointScaling::LibinputDebug => {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs)
         }
         _ => {}

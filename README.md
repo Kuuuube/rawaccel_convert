@@ -12,11 +12,13 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 ## Global Args
 
-- `--pointscaling` (Default: `sens`): `sens`, `velocity`, or `libinput`.
+- `--pointscaling` (Default: `sens`): `sens`, `velocity`, `libinput`, or `libinputdebug`.
 
     Rawaccel's first graph uses `sens`, the second graph uses `velocity`.
 
     Libinput uses `libinput`. [Libinput custom accel curve setup](./docs/libinput.md).
+
+    To output libinput values matching the format of `velocity` use `libinputdebug`. The output of `libinputdebug` cannot be used in libinput directly.
 
 - `--pointcount` (Default: `64`): The number of points to include in the output.
 
