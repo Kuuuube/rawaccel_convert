@@ -64,7 +64,11 @@ fn synchronous_legacy(x: f64, args: &AccelArgs) -> f64 {
 fn synchronous_gain(x: f64, args: &AccelArgs) -> f64 {
     let capacity = LUT_RAW_DATA_CAPACITY;
     let velocity: bool = true;
-    let range = FpRepRange { start: -3, stop: 9, num: 8 };
+    let range = FpRepRange {
+        start: -3,
+        stop: 9,
+        num: 8,
+    };
     let x_start: f64 = scalbn(1.0, range.start);
 
     let mut sum: f64 = 0.0;
@@ -77,13 +81,25 @@ fn synchronous_gain(x: f64, args: &AccelArgs) -> f64 {
         let exp_scale: f64 = scalbn(1.0, e + range.start) / range.num as f64;
         let mut i: i32 = 0;
         while i < range.num {
-            args_data.push(make_args_data((i + range.num) as f64 * exp_scale, &mut sum, &mut a, velocity, &args));
+            args_data.push(make_args_data(
+                (i + range.num) as f64 * exp_scale,
+                &mut sum,
+                &mut a,
+                velocity,
+                &args,
+            ));
             i += 1;
         }
         e += 1;
     }
 
-    args_data.push(make_args_data(scalbn(1.0, range.stop), &mut sum, &mut a, velocity, &args));
+    args_data.push(make_args_data(
+        scalbn(1.0, range.stop),
+        &mut sum,
+        &mut a,
+        velocity,
+        &args,
+    ));
 
     //operator
     let data = args_data;
