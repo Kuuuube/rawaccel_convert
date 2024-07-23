@@ -20,5 +20,15 @@ fn main() {
     let accel_args = args_parser::parser(args).expect("Args parsing failed");
 
     let curve = generate_curve::generate_curve(&accel_args);
-    println!("{:?}", curve);
+    match accel_args.point_scaling {
+        types::PointScaling::Libinput => {
+            for point in curve {
+                print!("{} ", point.y);
+            }
+            print!("\n");
+        }
+        _ => {
+            println!("{:?}", curve)
+        }
+    }
 }
