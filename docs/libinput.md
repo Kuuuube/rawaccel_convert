@@ -44,6 +44,12 @@ Applying a custom accel curve with libinput.
 
     **Replace `{accel_points}` with the output of `rawaccel_convert` with `--pointscaling=libinput` flag.**
 
+6. To check everything has been set as expected, run:
+
+    ```
+    xinput list-props {mouse_id}
+    ```
+
 ### Reverting these changes
 
 
