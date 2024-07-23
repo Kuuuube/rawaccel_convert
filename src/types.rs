@@ -103,6 +103,7 @@ pub enum PointScaling {
     Sens,
     Velocity,
     Gain,
+    Libinput,
 }
 
 impl std::str::FromStr for PointScaling {
@@ -111,6 +112,7 @@ impl std::str::FromStr for PointScaling {
             "sens" => return Ok(PointScaling::Sens),
             "velocity" => return Ok(PointScaling::Velocity),
             "gain" => return Ok(PointScaling::Gain),
+            "libinput" => return Ok(PointScaling::Libinput),
             _ => return Err("Invalid PointScaling string".to_string()),
         }
     }

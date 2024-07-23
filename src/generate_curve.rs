@@ -5,7 +5,10 @@ use crate::{
 };
 
 pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
-    let curve_steps = step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64);
+    let curve_steps = match args.point_scaling {
+        PointScaling::Libinput => int_step_maker(0, (args.dpi / 20) as u32),
+        _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
+    };
     let mut curve_outputs: Vec<Point> = vec![];
     for curve_step in curve_steps {
         let output_sens = match args.mode {
@@ -26,6 +29,14 @@ pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
     }
 
     return optimized_decimation(curve_outputs, args.point_count);
+}
+
+fn int_step_maker(start: u32, end: u32) -> Vec<f64> {
+    let mut steps: Vec<f64> = vec![];
+    for i in start..end {
+        steps.push(i as f64);
+    }
+    return steps;
 }
 
 fn step_maker(step_count: u32, start: f64, end: f64) -> Vec<f64> {
