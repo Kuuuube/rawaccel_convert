@@ -9,13 +9,14 @@ use accel_curves::synchronous::synchronous;
 use types::{AccelArgs, CapMode};
 
 mod accel_curves;
+mod generate_curve;
 mod types;
 mod utility;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     let mut accel_args = AccelArgs::default();
-    let sens_multiplier = 1.0;
+    accel_args.sens_multiplier = 1.0;
     accel_args.gain = true;
     accel_args.cap_mode = CapMode::Output;
 
@@ -27,18 +28,14 @@ fn main() {
         }
     };
 
-    for i in 0..80 {
-        let x = i as f64;
-        let accel = sens_multiplier
-            * match accel_curve.as_str() {
-                "linear" | "classic" => classic(x, &accel_args),
-                "jump" => jump(x, &accel_args),
-                "natural" => natural(x, &accel_args),
-                "synchronous" => synchronous(x, &accel_args),
-                "power" => power(x, &accel_args),
-                _ => noaccel(x, &accel_args),
-            };
-        print!("({},{}),", x, accel);
-    }
-    print!("\n");
+    accel_args.mode = match accel_curve.as_str() {
+        "linear" | "classic" => types::AccelMode::Classic,
+        "jump" => types::AccelMode::Jump,
+        "natural" => types::AccelMode::Natural,
+        "synchronous" => types::AccelMode::Synchronous,
+        "power" => types::AccelMode::Power,
+        _ => types::AccelMode::Noaccel,
+    };
+    let libinput_curve = generate_curve::generate_curve(&accel_args, 64);
+    println!("{:?}", libinput_curve);
 }

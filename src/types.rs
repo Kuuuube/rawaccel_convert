@@ -18,6 +18,8 @@ pub struct AccelArgs {
 
     pub cap: Vec2,
     pub cap_mode: CapMode,
+
+    pub sens_multiplier: f64,
 }
 
 impl Default for AccelArgs {
@@ -40,6 +42,7 @@ impl Default for AccelArgs {
             //{x: input_cap, y: output_cap}
             cap: Vec2 { x: 15.0, y: 1.5 },
             cap_mode: CapMode::Output,
+            sens_multiplier: 1.0,
         }
     }
 }
@@ -78,5 +81,17 @@ pub struct FpRepRange {
 impl FpRepRange {
     pub fn size(&self) -> i32 {
         return (self.stop - self.start) * self.num + 1;
+    }
+}
+
+#[derive(Copy, Clone)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
+
+impl std::fmt::Debug for Point {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
     }
 }
