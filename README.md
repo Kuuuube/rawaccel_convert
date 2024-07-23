@@ -14,7 +14,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 `--pointscaling` (Default: `sens`): `sens`, `velocity`, or `libinput`. Rawaccel's first graph uses `sens`, the second graph uses `velocity`. Libinput uses `libinput`.
 
-`--pointcount` (Default: `64`): The number of points to include in the output.
+`--pointcount` (Default: `64`): The number of points to include in the output. The maximum points libinput allows is `64`.
 
 `--dpi` (Default: `1000`): Your mouse DPI. Controls the max input speed to calculate for.
 
