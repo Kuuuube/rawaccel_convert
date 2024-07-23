@@ -24,8 +24,9 @@ pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
             y: output_sens * args.sens_multiplier,
         });
     }
-    if let PointScaling::Velocity = args.point_scaling {
-        curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
+    match args.point_scaling {
+        PointScaling::Velocity => curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs),
+        _ => {}
     }
 
     return optimized_decimation(curve_outputs, args.point_count);
