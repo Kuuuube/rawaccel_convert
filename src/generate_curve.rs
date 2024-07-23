@@ -1,9 +1,10 @@
 use crate::{
-    types::{AccelArgs, Point},
+    convert_curve,
+    types::{AccelArgs, Point, PointScaling},
     utility::{self, lerp},
 };
 
-pub fn generate_curve(args: &AccelArgs, point_count: u32) -> Vec<Point> {
+pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
     let curve_steps = step_maker(1000, 0.0, 80.0);
     let mut curve_outputs: Vec<Point> = vec![];
     for curve_step in curve_steps {
@@ -13,7 +14,6 @@ pub fn generate_curve(args: &AccelArgs, point_count: u32) -> Vec<Point> {
             crate::types::AccelMode::Natural => crate::natural(curve_step, args),
             crate::types::AccelMode::Synchronous => crate::synchronous(curve_step, args),
             crate::types::AccelMode::Power => crate::power(curve_step, args),
-            crate::types::AccelMode::Lookup => todo!(),
             crate::types::AccelMode::Noaccel => crate::noaccel(curve_step, args),
         };
         curve_outputs.push(Point {
@@ -21,7 +21,11 @@ pub fn generate_curve(args: &AccelArgs, point_count: u32) -> Vec<Point> {
             y: output_sens * args.sens_multiplier,
         });
     }
-    return optimized_decimation(curve_outputs, point_count);
+    if let PointScaling::Velocity = args.point_scaling {
+        curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
+    }
+
+    return optimized_decimation(curve_outputs, args.point_count);
 }
 
 fn step_maker(step_count: u32, start: f64, end: f64) -> Vec<f64> {

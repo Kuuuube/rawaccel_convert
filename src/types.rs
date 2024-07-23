@@ -20,6 +20,9 @@ pub struct AccelArgs {
     pub cap_mode: CapMode,
 
     pub sens_multiplier: f64,
+
+    pub point_count: u32,
+    pub point_scaling: PointScaling,
 }
 
 impl Default for AccelArgs {
@@ -43,6 +46,9 @@ impl Default for AccelArgs {
             cap: Vec2 { x: 15.0, y: 1.5 },
             cap_mode: CapMode::Output,
             sens_multiplier: 1.0,
+
+            point_count: 64,
+            point_scaling: PointScaling::Sens,
         }
     }
 }
@@ -60,7 +66,7 @@ pub enum AccelMode {
     Natural,
     Synchronous,
     Power,
-    Lookup,
+    //Lookup,
     Noaccel,
 }
 
@@ -69,6 +75,45 @@ pub enum CapMode {
     InputOutput,
     Input,
     Output,
+}
+
+impl Default for CapMode {
+    fn default() -> Self {
+        CapMode::Output
+    }
+}
+
+impl std::str::FromStr for CapMode {
+    fn from_str(s: &str) -> Result<CapMode, String> {
+        match s.to_lowercase().as_str() {
+            "input" => return Ok(CapMode::Input),
+            "output" => return Ok(CapMode::Output),
+            "both" | "inputoutput" => return Ok(CapMode::InputOutput),
+            _ => return Err("Invalid CapMode string".to_string()),
+        }
+    }
+
+    type Err = String;
+}
+
+#[derive(Debug, Clone)]
+pub enum PointScaling {
+    Sens,
+    Velocity,
+    Gain,
+}
+
+impl std::str::FromStr for PointScaling {
+    fn from_str(s: &str) -> Result<PointScaling, String> {
+        match s.to_lowercase().as_str() {
+            "sens" => return Ok(PointScaling::Sens),
+            "velocity" => return Ok(PointScaling::Velocity),
+            "gain" => return Ok(PointScaling::Gain),
+            _ => return Err("Invalid PointScaling string".to_string()),
+        }
+    }
+
+    type Err = String;
 }
 
 #[derive(Debug, Clone)]
