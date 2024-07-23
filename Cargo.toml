@@ -4,3 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
+[lib]
+name = "rawaccel_convert"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rawaccel_convert"
+path = "src/main.rs"
