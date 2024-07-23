@@ -28,6 +28,8 @@ Applying a custom accel curve with libinput.
     xinput set-prop {mouse_id} "libinput Accel Profile Enabled" 0, 0, 1
     ```
 
+    Sometimes this may not update properly right away. Try running it a second time if that happens.
+
     **Replace `{mouse_id}` with your mouse's ID.**
 
 4. Set the correct step size:
@@ -58,6 +60,8 @@ Applying a custom accel curve with libinput.
     ```
     xinput set-prop {mouse_id} "libinput Accel Profile Enabled" 1, 0, 0
     ```
+
+    Sometimes this may not update properly right away. Try running it a second time if that happens.
 
 2. To reset the custom accel curve step size, run:
 
