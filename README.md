@@ -28,7 +28,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 `--accel` (Default: `0.005`) The `Acceleration` field in rawaccel.
 
-`--captype` (Default: `output`) `output` or `input` or `both`. The `Cap Type` field in rawaccel.
+`--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
 
 `--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
 
@@ -40,7 +40,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 `--accel` (Default: `0.005`) The `Acceleration` field in rawaccel.
 
-`--captype` (Default: `output`) `output` or `input` or `both`. The `Cap Type` field in rawaccel.
+`--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
 
 `--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
 
@@ -80,7 +80,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 `--scale` (Default: `1`) The `Scale` field in rawaccel.
 
-`--captype` (Default: `output`) `output` or `input` or `both`. The `Cap Type` field in rawaccel.
+`--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
 
 `--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
 
