@@ -84,6 +84,6 @@ pub fn scalbn(x: f64, mut n: i32) -> f64 {
     y * f64::from_bits(((0x3ff + n) as u64) << 52)
 }
 
-pub fn lerp(base: f64, other: f64, scalar: f64) -> f64 {
-    base + (other - base) * scalar
+pub fn lerp(start: f64, end: f64, input: f64) -> f64 {
+    start + input * (end - start)
 }
