@@ -72,3 +72,16 @@ pub enum CapMode {
     Input,
     Output,
 }
+
+#[derive(Debug, Clone)]
+pub struct FpRepRange {
+    pub start: i32,
+    pub stop: i32,
+    pub num: i32,
+}
+
+impl FpRepRange {
+    pub fn size(&self) -> i32 {
+        return (self.stop - self.start) * self.num + 1;
+    }
+}
