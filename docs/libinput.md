@@ -14,7 +14,7 @@ Applying a custom accel curve with libinput.
 
     ```
     ⎡ Virtual core pointer                      id=2    [master pointer  (3)]
-    ⎜   ↳ Gaming Mouse Keyboard                 id=15   [slave  pointer  (2)]
+    ⎜   ↳ Gaming Mouse Keyboard                 id=14   [slave  pointer  (2)]
     ⎜   ↳ Gaming Mouse                          id=15   [slave  pointer  (2)]
     ⎣ Virtual core keyboard                     id=3    [master keyboard (2)]
     ...
