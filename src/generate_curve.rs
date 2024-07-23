@@ -25,7 +25,9 @@ pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
         });
     }
     match args.point_scaling {
-        PointScaling::Velocity => curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs),
+        PointScaling::Velocity => {
+            curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs)
+        }
         _ => {}
     }
 
