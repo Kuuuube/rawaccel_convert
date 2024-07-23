@@ -19,6 +19,6 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let accel_args = args_parser::parser(args).expect("Args parsing failed");
 
-    let libinput_curve = generate_curve::generate_curve(&accel_args);
-    println!("{:?}", libinput_curve);
+    let curve = generate_curve::generate_curve(&accel_args);
+    println!("{:?}", curve);
 }
