@@ -5,7 +5,7 @@ use crate::{
 };
 
 pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
-    let curve_steps = step_maker(1000, 0.0, 80.0);
+    let curve_steps = step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64);
     let mut curve_outputs: Vec<Point> = vec![];
     for curve_step in curve_steps {
         let output_sens = match args.mode {

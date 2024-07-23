@@ -87,6 +87,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .parse::<u32>()
                             .unwrap_or_else(|_| AccelArgs::default().point_count)
                     }
+                    "--dpi" => {
+                        accel_args.dpi = split
+                            .1
+                            .parse::<u32>()
+                            .unwrap_or_else(|_| AccelArgs::default().dpi)
+                    }
                     _ => {
                         println!("Unknown argument {}", arg)
                     }
@@ -140,6 +146,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .parse::<u32>()
                             .unwrap_or_else(|_| AccelArgs::default().point_count)
                     }
+                    "--dpi" => {
+                        accel_args.dpi = split
+                            .1
+                            .parse::<u32>()
+                            .unwrap_or_else(|_| AccelArgs::default().dpi)
+                    }
                     _ => {
                         println!("Unknown argument {}", arg)
                     }
@@ -192,6 +204,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .1
                             .parse::<u32>()
                             .unwrap_or_else(|_| AccelArgs::default().point_count)
+                    }
+                    "--dpi" => {
+                        accel_args.dpi = split
+                            .1
+                            .parse::<u32>()
+                            .unwrap_or_else(|_| AccelArgs::default().dpi)
                     }
                     _ => {
                         println!("Unknown argument {}", arg)
@@ -251,6 +269,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .1
                             .parse::<u32>()
                             .unwrap_or_else(|_| AccelArgs::default().point_count)
+                    }
+                    "--dpi" => {
+                        accel_args.dpi = split
+                            .1
+                            .parse::<u32>()
+                            .unwrap_or_else(|_| AccelArgs::default().dpi)
                     }
                     _ => {
                         println!("Unknown argument {}", arg)
@@ -322,6 +346,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .1
                             .parse::<u32>()
                             .unwrap_or_else(|_| AccelArgs::default().point_count)
+                    }
+                    "--dpi" => {
+                        accel_args.dpi = split
+                            .1
+                            .parse::<u32>()
+                            .unwrap_or_else(|_| AccelArgs::default().dpi)
                     }
                     _ => {
                         println!("Unknown argument {}", arg)
