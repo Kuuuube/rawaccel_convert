@@ -12,83 +12,89 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 ## Global Args
 
-`--pointscaling` (Default: `sens`): `sens`, `velocity`, or `libinput`. Rawaccel's first graph uses `sens`, the second graph uses `velocity`. Libinput uses `libinput`.
+- `--pointscaling` (Default: `sens`): `sens`, `velocity`, or `libinput`.
 
-`--pointcount` (Default: `64`): The number of points to include in the output. The maximum points libinput allows is `64`.
+    Rawaccel's first graph uses `sens`, the second graph uses `velocity`.
 
-`--dpi` (Default: `1000`): Your mouse DPI. Controls the max input speed to calculate for.
+    Libinput uses `libinput`. [Libinput custom accel curve setup](./docs/libinput.md).
 
-`--sens` (Default: `1`): The `Sens Multiplier` field in rawaccel.
+- `--pointcount` (Default: `64`): The number of points to include in the output.
 
-`--gain` (Default: `true`): `true` or `false`. The `Gain` checkbox in rawaccel.
+    The maximum points libinput allows is `64`.
+
+- `--dpi` (Default: `1000`): Your mouse DPI. Controls the max input speed to calculate for.
+
+- `--sens` (Default: `1`): The `Sens Multiplier` field in rawaccel.
+
+- `--gain` (Default: `true`): `true` or `false`. The `Gain` checkbox in rawaccel.
 
 ## Curve types
 
 ### Linear
 
-`--accel` (Default: `0.005`) The `Acceleration` field in rawaccel.
+- `--accel` (Default: `0.005`) The `Acceleration` field in rawaccel.
 
-`--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
+- `--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
 
-`--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
+- `--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
 
-`--capout` (Default: `1.5`) The `Cap: Output` field in rawaccel.
+- `--capout` (Default: `1.5`) The `Cap: Output` field in rawaccel.
 
-`--offsetin` (Default: `0`) The `Input Offset` field in rawaccel.
+- `--offsetin` (Default: `0`) The `Input Offset` field in rawaccel.
 
 ### Classic
 
-`--accel` (Default: `0.005`) The `Acceleration` field in rawaccel.
+- `--accel` (Default: `0.005`) The `Acceleration` field in rawaccel.
 
-`--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
+- `--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
 
-`--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
+- `--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
 
-`--capout` (Default: `1.5`) The `Cap: Output` field in rawaccel.
+- `--capout` (Default: `1.5`) The `Cap: Output` field in rawaccel.
 
-`--offsetin` (Default: `0`) The `Input Offset` field in rawaccel.
+- `--offsetin` (Default: `0`) The `Input Offset` field in rawaccel.
 
-`--power` (Default: `2`) The `Power` field in rawaccel.
+- `--power` (Default: `2`) The `Power` field in rawaccel.
 
 ### Jump
 
-`--smooth` (Default: `0.5`) The `Smooth` field in rawaccel.
+- `--smooth` (Default: `0.5`) The `Smooth` field in rawaccel.
 
-`--input` (Default: `15`) The `Input` field in rawaccel.
+- `--input` (Default: `15`) The `Input` field in rawaccel.
 
-`--output` (Default: `1.5`) The `Output` field in rawaccel.
+- `--output` (Default: `1.5`) The `Output` field in rawaccel.
 
 ### Natural
 
-`--decay` (Default: `0.1`) The `Decay Rate` field in rawaccel.
+- `--decay` (Default: `0.1`) The `Decay Rate` field in rawaccel.
 
-`--offsetin` (Default: `0`) The `Input Offset` field in rawaccel.
+- `--offsetin` (Default: `0`) The `Input Offset` field in rawaccel.
 
-`--limit` (Default: `1.5`) The `Limit` field in rawaccel.
+- `--limit` (Default: `1.5`) The `Limit` field in rawaccel.
 
 ### Synchronous
 
-`--gamma` (Default: `1`) The `Gamma` field in rawaccel.
+- `--gamma` (Default: `1`) The `Gamma` field in rawaccel.
 
-`--smooth` (Default: `0.5`) The `Smooth` field in rawaccel.
+- `--smooth` (Default: `0.5`) The `Smooth` field in rawaccel.
 
-`--motivity` (Default: `1.5`) The `Motivity` field in rawaccel.
+- `--motivity` (Default: `1.5`) The `Motivity` field in rawaccel.
 
-`--syncspeed` (Default: `5`) The `SyncSpeed` field in rawaccel.
+- `--syncspeed` (Default: `5`) The `SyncSpeed` field in rawaccel.
 
 ### Power
 
-`--scale` (Default: `1`) The `Scale` field in rawaccel.
+- `--scale` (Default: `1`) The `Scale` field in rawaccel.
 
-`--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
+- `--captype` (Default: `output`) `output`, `input`, or `both`. The `Cap Type` field in rawaccel.
 
-`--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
+- `--capin` (Default: `15`) The `Cap: Input` field in rawaccel.
 
-`--capout` (Default: `1.5`) The `Cap: Output` field in rawaccel.
+- `--capout` (Default: `1.5`) The `Cap: Output` field in rawaccel.
 
-`--exponent` (Default: `0.05`) The `Exponent` field in rawaccel.
+- `--exponent` (Default: `0.05`) The `Exponent` field in rawaccel.
 
-`--offsetout` (Default: `0`) The `Output Offset` field in rawaccel.
+- `--offsetout` (Default: `0`) The `Output Offset` field in rawaccel.
 
 ## Examples
 
