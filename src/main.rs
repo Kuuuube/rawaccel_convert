@@ -9,6 +9,7 @@ use accel_curves::synchronous::synchronous;
 use types::{AccelArgs, CapMode};
 
 mod accel_curves;
+mod convert_curve;
 mod generate_curve;
 mod types;
 mod utility;
@@ -36,6 +37,7 @@ fn main() {
         "power" => types::AccelMode::Power,
         _ => types::AccelMode::Noaccel,
     };
-    let libinput_curve = generate_curve::generate_curve(&accel_args, 64);
+    let libinput_curve =
+        convert_curve::sensitivity_to_velocity(generate_curve::generate_curve(&accel_args, 64));
     println!("{:?}", libinput_curve);
 }
