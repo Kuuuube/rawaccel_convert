@@ -12,7 +12,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 ## Global Args
 
-`--pointscaling` (Default: `sens`): `sens` or `velocity`. Rawaccel's first graph uses `sens`, the second graph uses `velocity`. Libinput uses `velocity`.
+`--pointscaling` (Default: `sens`): `sens`, `velocity`, or `libinput`. Rawaccel's first graph uses `sens`, the second graph uses `velocity`. Libinput uses `libinput`.
 
 `--pointcount` (Default: `64`): The number of points to include in the output.
 
