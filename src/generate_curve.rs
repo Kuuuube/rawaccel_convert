@@ -105,5 +105,5 @@ fn optimized_decimation(points: Vec<Point>, target_number: u32) -> Vec<Point> {
         }
     }
 
-    return points;
+    panic!("fn optimized_decimation escaped bounds");
 }
