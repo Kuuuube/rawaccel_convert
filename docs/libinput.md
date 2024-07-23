@@ -64,3 +64,9 @@ Applying a custom accel curve with libinput.
     ```
     xinput set-prop {mouse_id} "libinput Accel Custom Motion Points" 0.0, 0.5, 1.0
     ```
+
+## Wayland
+
+I'm currently unaware of any methods for applying a custom accel curve on wayland. If you know how, please contact me through github issues or make a PR on this repo adding a method for this.
+
+Libinput pointer acceleration docs: https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html
