@@ -89,3 +89,9 @@ Filling all arguments is not required. Some curves conditionally change what the
 `--exponent` (Default: `0.05`) The `Exponent` field in rawaccel.
 
 `--offsetout` (Default: `0`) The `Output Offset` field in rawaccel.
+
+## Examples
+
+```
+rawaccel_convert classic --sens=0.25 --accel=0.0315 --captype=input --capin=34 --power=2.5 --dpi=1600
+```
