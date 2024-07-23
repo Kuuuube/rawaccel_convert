@@ -43,9 +43,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                     .parse::<u32>()
                     .unwrap_or_else(|_| AccelArgs::default().dpi)
             }
-            _ => {
-                println!("Unknown argument {}", arg)
-            }
+            _ => {}
         }
     }
 
