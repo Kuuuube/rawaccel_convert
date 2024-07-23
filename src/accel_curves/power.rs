@@ -23,9 +23,9 @@ fn base_fn(x: f64, args: &AccelArgs, offset: Vec2, scale: f64, constant: f64) ->
 
 fn power_legacy(x: f64, args: &AccelArgs) -> f64 {
     //power_base
-    let mut offset: Vec2;
+    let offset: Vec2;
     let scale: f64;
-    let mut constant: f64;
+    let constant: f64;
 
     let n: f64 = args.exponent_power;
 
@@ -74,9 +74,9 @@ fn power_legacy(x: f64, args: &AccelArgs) -> f64 {
 
 fn power_gain(x: f64, args: &AccelArgs) -> f64 {
     //power_base
-    let mut offset: Vec2;
+    let offset: Vec2;
     let scale: f64;
-    let mut constant: f64;
+    let constant: f64;
 
     let n: f64 = args.exponent_power;
 

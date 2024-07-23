@@ -18,9 +18,6 @@ pub struct AccelArgs {
 
     pub cap: Vec2,
     pub cap_mode: CapMode,
-
-    pub length: i32,
-    pub data: Vec<f64>,
 }
 
 impl Default for AccelArgs {
@@ -43,8 +40,6 @@ impl Default for AccelArgs {
             //{x: input_cap, y: output_cap}
             cap: Vec2 { x: 15.0, y: 1.5 },
             cap_mode: CapMode::Output,
-            length: 0,
-            data: vec![],
         }
     }
 }
