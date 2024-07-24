@@ -29,13 +29,18 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         });
     }
     match args.point_scaling {
-        PointScaling::Velocity | PointScaling::Libinput | PointScaling::LibinputDebug => {
-            curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs)
+        PointScaling::Libinput | PointScaling::LibinputDebug => {
+            curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
         }
-        _ => {}
+        PointScaling::Velocity => {
+            curve_outputs = optimized_decimation(convert_curve::sensitivity_to_velocity(curve_outputs), args.point_count);
+        }
+        _ => {
+            curve_outputs = optimized_decimation(curve_outputs, args.point_count);
+        }
     }
 
-    return CurvegenResult {points: optimized_decimation(curve_outputs, args.point_count), step_size: curve_steps.step_size};
+    return CurvegenResult {points: curve_outputs, step_size: curve_steps.step_size};
 }
 
 fn step_maker(step_count: u32, start: f64, end: f64) -> Steps {
