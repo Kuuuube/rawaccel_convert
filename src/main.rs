@@ -22,13 +22,19 @@ fn main() {
     let curve = generate_curve::generate_curve(&accel_args);
     match accel_args.point_scaling {
         types::PointScaling::Libinput => {
-            for point in curve {
+            println!("Libinput Step:\n{}", curve.step_size);
+            print!("Points:\n");
+            for point in curve.points {
                 print!("{} ", point.y);
             }
             print!("\n");
         }
+        types::PointScaling::LibinputDebug => {
+            println!("Libinput Step:\n{}", curve.step_size);
+            println!("Points:\n{:?}", curve.points);
+        }
         _ => {
-            println!("{:?}", curve)
+            println!("{:?}", curve.points);
         }
     }
 }

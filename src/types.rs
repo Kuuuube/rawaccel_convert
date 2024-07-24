@@ -153,3 +153,15 @@ impl std::fmt::Debug for Point {
         write!(f, "({}, {})", self.x, self.y)
     }
 }
+
+#[derive(Debug, Clone)]
+pub struct CurvegenResult {
+    pub points: Vec<Point>,
+    pub step_size: f64,
+}
+
+#[derive(Debug, Clone)]
+pub struct Steps {
+    pub x_values: Vec<f64>,
+    pub step_size: f64,
+}

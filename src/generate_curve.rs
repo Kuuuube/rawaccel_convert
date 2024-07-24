@@ -1,16 +1,20 @@
 use crate::{
     convert_curve,
-    types::{AccelArgs, Point, PointScaling},
+    types::{AccelArgs, CurvegenResult, Point, PointScaling, Steps},
     utility::{self, lerp},
 };
 
-pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
+pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
     let curve_steps = match args.point_scaling {
-        PointScaling::Libinput | PointScaling::LibinputDebug => libinput_step_maker(),
-        _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
+        PointScaling::Libinput | PointScaling::LibinputDebug => {
+            libinput_step_maker()
+        },
+        _ => {
+            step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64)
+        },
     };
     let mut curve_outputs: Vec<Point> = vec![];
-    for curve_step in curve_steps {
+    for curve_step in curve_steps.x_values {
         let output_sens = match args.mode {
             crate::types::AccelMode::Classic | crate::types::AccelMode::Linear => crate::classic(curve_step, args),
             crate::types::AccelMode::Jump => crate::jump(curve_step, args),
@@ -31,24 +35,24 @@ pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
         _ => {}
     }
 
-    return optimized_decimation(curve_outputs, args.point_count);
+    return CurvegenResult {points: optimized_decimation(curve_outputs, args.point_count), step_size: curve_steps.step_size};
 }
 
-fn libinput_step_maker() -> Vec<f64> {
+fn libinput_step_maker() -> Steps {
     let mut steps: Vec<f64> = vec![];
     for i in 0..64 {
         steps.push(i as f64);
     }
-    return steps;
+    return Steps {x_values: steps, step_size: 1.0};
 }
 
-fn step_maker(step_count: u32, start: f64, end: f64) -> Vec<f64> {
+fn step_maker(step_count: u32, start: f64, end: f64) -> Steps {
     let step_distance = 1.0 / (step_count - 1) as f64;
     let mut steps: Vec<f64> = vec![];
     for i in 0..step_count {
         steps.push(utility::lerp(start, end, i as f64 * step_distance));
     }
-    return steps;
+    return Steps {x_values: steps, step_size: step_distance};
 }
 
 //ramer douglas peuker line decimation
