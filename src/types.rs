@@ -61,7 +61,7 @@ pub struct Vec2 {
     pub y: f64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum AccelMode {
     Classic,
     Jump,
@@ -78,7 +78,7 @@ impl Default for AccelMode {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum CapMode {
     InputOutput,
     Input,
@@ -104,7 +104,7 @@ impl std::str::FromStr for CapMode {
     type Err = String;
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum PointScaling {
     Sens,
     Velocity,
