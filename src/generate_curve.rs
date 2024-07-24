@@ -12,7 +12,7 @@ pub fn generate_curve(args: &AccelArgs) -> Vec<Point> {
     let mut curve_outputs: Vec<Point> = vec![];
     for curve_step in curve_steps {
         let output_sens = match args.mode {
-            crate::types::AccelMode::Classic => crate::classic(curve_step, args),
+            crate::types::AccelMode::Classic | crate::types::AccelMode::Linear => crate::classic(curve_step, args),
             crate::types::AccelMode::Jump => crate::jump(curve_step, args),
             crate::types::AccelMode::Natural => crate::natural(curve_step, args),
             crate::types::AccelMode::Synchronous => crate::synchronous(curve_step, args),

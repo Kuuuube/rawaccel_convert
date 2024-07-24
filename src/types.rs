@@ -63,6 +63,7 @@ pub struct Vec2 {
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum AccelMode {
+    Linear,
     Classic,
     Jump,
     Natural,

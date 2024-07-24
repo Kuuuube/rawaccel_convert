@@ -13,7 +13,8 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
     }
 
     accel_args.mode = match args[1].as_str() {
-        "linear" | "classic" => types::AccelMode::Classic,
+        "linear" => types::AccelMode::Linear,
+        "classic" => types::AccelMode::Classic,
         "jump" => types::AccelMode::Jump,
         "natural" => types::AccelMode::Natural,
         "synchronous" => types::AccelMode::Synchronous,
@@ -49,7 +50,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
 
     //curve args
     match accel_args.mode {
-        types::AccelMode::Classic => {
+        types::AccelMode::Classic | types::AccelMode::Linear => {
             for arg in &args {
                 let split: (&str, &str) = unwrap_option_or_continue!(arg.split_once("="));
                 match &split.0.to_lowercase() as &str {
