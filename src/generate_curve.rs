@@ -39,7 +39,6 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             }
         }
         _ => {
-            curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
             if args.optimize_curve {
                 curve_outputs = optimized_decimation(curve_outputs, args.point_count);
             }
