@@ -86,7 +86,7 @@ Applying a custom accel curve with libinput.
 3. To reset the custom accel curve points, run:
 
     ```
-    xinput set-prop {mouse_id} "libinput Accel Custom Motion Points" 0.0, 0.5, 1.0
+    xinput set-prop {mouse_id} "libinput Accel Custom Motion Points" 0.0, 1.0
     ```
 
 ## Wayland
