@@ -1,4 +1,4 @@
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct AccelArgs {
     pub mode: AccelMode,
     pub gain: bool,
@@ -55,7 +55,7 @@ impl Default for AccelArgs {
     }
 }
 
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub struct Vec2 {
     pub x: f64,
     pub y: f64,
