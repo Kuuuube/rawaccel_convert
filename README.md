@@ -24,7 +24,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
     The maximum points libinput allows is `64`.
 
-- `--dpi` (Default: `1000`): Your mouse DPI. Controls the max input speed to calculate for.
+- `--dpi` (Default: `1200`): Your mouse DPI. Controls the max input speed to calculate for.
 
 - `--sens` (Default: `1`): The `Sens Multiplier` field in rawaccel.
 

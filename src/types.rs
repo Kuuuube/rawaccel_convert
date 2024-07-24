@@ -50,7 +50,7 @@ impl Default for AccelArgs {
 
             point_count: 64,
             point_scaling: PointScaling::Sens,
-            dpi: 1000,
+            dpi: 1200,
         }
     }
 }
