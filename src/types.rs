@@ -72,6 +72,12 @@ pub enum AccelMode {
     Noaccel,
 }
 
+impl Default for AccelMode {
+    fn default() -> Self {
+        AccelMode::Classic
+    }
+}
+
 #[derive(Debug, Clone)]
 pub enum CapMode {
     InputOutput,
