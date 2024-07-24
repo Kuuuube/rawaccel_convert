@@ -1,6 +1,6 @@
 # Rawaccel Convert
 
-Tool for converting rawaccel curve settings to points.
+Tool for converting rawaccel curve settings to points. GUI version: [Rawaccel Convert GUI](https://github.com/Kuuuube/rawaccel-convert-gui).
 
 # CLI
 
