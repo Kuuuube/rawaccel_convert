@@ -24,6 +24,8 @@ pub struct AccelArgs {
     pub point_count: u32,
     pub point_scaling: PointScaling,
     pub dpi: u32,
+
+    pub optimize_curve: bool,
 }
 
 impl Default for AccelArgs {
@@ -51,6 +53,8 @@ impl Default for AccelArgs {
             point_count: 64,
             point_scaling: PointScaling::Sens,
             dpi: 1200,
+
+            optimize_curve: true,
         }
     }
 }

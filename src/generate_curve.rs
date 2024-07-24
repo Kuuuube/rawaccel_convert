@@ -33,10 +33,16 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
         }
         PointScaling::Velocity => {
-            curve_outputs = optimized_decimation(convert_curve::sensitivity_to_velocity(curve_outputs), args.point_count);
+            curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
+            if args.optimize_curve {
+                curve_outputs = optimized_decimation(curve_outputs, args.point_count);
+            }
         }
         _ => {
-            curve_outputs = optimized_decimation(curve_outputs, args.point_count);
+            curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
+            if args.optimize_curve {
+                curve_outputs = optimized_decimation(curve_outputs, args.point_count);
+            }
         }
     }
 
