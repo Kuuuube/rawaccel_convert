@@ -66,6 +66,20 @@ Applying a custom accel curve with libinput.
     xinput list-props {mouse_id}
     ```
 
+### Rotation
+
+- Input rotation can be set in degrees (0-359) using this command:
+
+    ```
+    xinput set-prop {mouse_id} "libinput Rotation Angle" {rotation_angle}
+    ```
+
+    Example:
+
+    ```
+    xinput set-prop 15 "libinput Rotation Angle" 90
+    ```
+
 ### Reverting these changes
 
 
