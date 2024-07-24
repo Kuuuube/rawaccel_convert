@@ -7,7 +7,7 @@ use crate::{
 pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
     let curve_steps = match args.point_scaling {
         PointScaling::Libinput | PointScaling::LibinputDebug => {
-            libinput_step_maker()
+            step_maker(64, 0.0, (args.dpi / 20) as f64)
         },
         _ => {
             step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64)
@@ -38,21 +38,14 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
     return CurvegenResult {points: optimized_decimation(curve_outputs, args.point_count), step_size: curve_steps.step_size};
 }
 
-fn libinput_step_maker() -> Steps {
-    let mut steps: Vec<f64> = vec![];
-    for i in 0..64 {
-        steps.push(i as f64);
-    }
-    return Steps {x_values: steps, step_size: 1.0};
-}
-
 fn step_maker(step_count: u32, start: f64, end: f64) -> Steps {
     let step_distance = 1.0 / (step_count - 1) as f64;
     let mut steps: Vec<f64> = vec![];
     for i in 0..step_count {
         steps.push(utility::lerp(start, end, i as f64 * step_distance));
     }
-    return Steps {x_values: steps, step_size: step_distance};
+    let step_size = utility::lerp(start, end, step_distance);
+    return Steps {x_values: steps, step_size: step_size};
 }
 
 //ramer douglas peuker line decimation
