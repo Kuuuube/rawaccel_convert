@@ -336,7 +336,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                 let split: (&str, &str) = unwrap_option_or_continue!(arg.split_once("="));
                 match &split.0.to_lowercase() as &str {
                     "--points" => {
-                        accel_args.lookup_data = parse_lookup_table(split.1.to_owned())
+                        accel_args.lookup_data = parse_lookup_table(split.1)
                             .unwrap_or_else(|| AccelArgs::default().lookup_data)
                     }
                     "--applyas" => {
@@ -360,7 +360,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
     return Some(accel_args);
 }
 
-pub fn parse_lookup_table(input_string: String) -> Option<Vec<Vec2>> {
+pub fn parse_lookup_table(input_string: &str) -> Option<Vec<Vec2>> {
     let mut parsed_points = vec![];
     let points: Vec<&str> = input_string.trim().split(";").collect();
     for point in points {
