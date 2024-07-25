@@ -338,7 +338,8 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                 match &split.0.to_lowercase() as &str {
                     "--points" => {
                         accel_args.lookup_data = parse_lookup_table(split.1)
-                            .unwrap_or_else(|| AccelArgs::default().lookup_data)
+                            .unwrap_or_else(|| AccelArgs::default().lookup_data);
+                        accel_args.point_count = accel_args.lookup_data.len() as u32;
                     }
                     "--applyas" => {
                         accel_args.gain = match split
