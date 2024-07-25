@@ -112,7 +112,16 @@ Note: Motivity has been superceded by `Synchronous`
 
 ### Lookup
 
-- `--points` (Default: ` `) The `Look Up Table` text box in rawaccel. Only supports either X or Y points, not both.
+- `--points` (Default: ` `) The `Look Up Table` text box in rawaccel. Split X/Y axis accel is not supported.
+
+    Do not include whitespace in your list of points.
+
+    You may need to wrap the points in quotes to avoid some shells interpreting `;` as a command.
+
+    Example:
+    ```
+    --points="1.505035,0.85549892;4.375,3.30972978;13.51,15.17478447;140,354.7026875;"
+    ```
 
 - `--applyas` (Default: `sens`) `sens` or `velocity`. The `Apply as` field in rawaccel.
 
