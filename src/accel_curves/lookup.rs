@@ -3,9 +3,6 @@ use crate::{
 };
 
 pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
-    if args.lookup_data.len() < 2 {
-        return None;
-    }
     let capacity = LUT_POINTS_CAPACITY;
 
     let size: i32 = (args.lookup_data.len() * 2) as i32;
@@ -51,9 +48,6 @@ pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
         }
     }
 
-    if points.len() < 1 {
-        return None;
-    }
     let mut y: f64 = unwrap_option_or_return_none!(points.get(0)).y;
     if velocity {
         y /= unwrap_option_or_return_none!(points.get(0)).x;
