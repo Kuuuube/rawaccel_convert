@@ -9,12 +9,15 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         (PointScaling::Libinput | PointScaling::LibinputDebug, _) => {
             step_maker(64, 0.0, (args.dpi / 20) as f64)
         }
-        (PointScaling::Sens | PointScaling::Velocity | PointScaling::Gain, AccelMode::Lookup) => {
+        (PointScaling::Sens | PointScaling::Velocity | PointScaling::Gain | PointScaling::Lookup, AccelMode::Lookup) => {
             let mut steps_vec = vec![];
             for point in &args.lookup_data {
                 steps_vec.push(point.x);
             }
             Steps { x_values: steps_vec, step_size: 0.0 }
+        }
+        (PointScaling::Lookup, _) => {
+            step_maker(256, 0.0, (args.dpi / 20) as f64)
         }
         _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
     };
@@ -65,7 +68,7 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         });
     }
     match args.point_scaling {
-        PointScaling::Libinput | PointScaling::LibinputDebug => {
+        PointScaling::Libinput | PointScaling::LibinputDebug | PointScaling::Lookup => {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
         }
         PointScaling::Velocity => {
