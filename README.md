@@ -86,6 +86,8 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 ### Motivity
 
+Note: Motivity has been superceded by `Synchronous`
+
 - `--growthrate` (Default: `1`) The `Growth Rate` field in rawaccel.
 
 - `--motivity` (Default: `1.5`) The `Motivity` field in rawaccel.
