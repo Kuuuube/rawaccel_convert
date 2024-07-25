@@ -15,6 +15,8 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 ## Global Args
 
+These args apply regardless of the curve type you select.
+
 - `--pointscaling` (Default: `sens`): `sens`, `velocity`, `libinput`, `libinputdebug`, or `lookup`.
 
     Rawaccel's first graph uses `sens`, the second graph uses `velocity`.
