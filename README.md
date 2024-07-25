@@ -108,6 +108,12 @@ Note: Motivity has been superceded by `Synchronous`
 
 - `--offsetout` (Default: `0`) The `Output Offset` field in rawaccel.
 
+### Lookup
+
+- `--points` (Default: ` `) The `Look Up Table` text box in rawaccel. Only supports either X or Y points, not both.
+
+- `--applyas` (Default: `sens`) `sens` or `velocity`. The `Apply as` field in rawaccel.
+
 ## Examples
 
 ```
