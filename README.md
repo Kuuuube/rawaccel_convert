@@ -10,6 +10,9 @@ rawaccel_convert CURVE_TYPE
 
 Filling all arguments is not required. Some curves conditionally change what they use based on other variables (ex: the `Cap Type`).
 
+> [!WARNING]
+> There is nearly zero input validation for both args and values. If you get a curve that doesn't make sense, check that you haven't made a typo. Visualizing your inputs with the [Rawaccel Convert GUI](https://github.com/Kuuuube/rawaccel-convert-gui) may also help.
+
 ## Global Args
 
 - `--pointscaling` (Default: `sens`): `sens`, `velocity`, `libinput`, `libinputdebug`, or `lookup`.
