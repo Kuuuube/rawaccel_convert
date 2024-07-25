@@ -1,6 +1,5 @@
 use crate::{
-    types::{self, AccelArgs, CapMode, PointScaling, Vec2},
-    unwrap_option_or_continue, unwrap_result_or_return_none,
+    types::{self, AccelArgs, CapMode, PointScaling, Vec2}, unwrap_option_or_continue, unwrap_result_or_continue
 };
 
 const BASE_ARGS_LENGTH: usize = 2;
@@ -20,6 +19,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
         "synchronous" => types::AccelMode::Synchronous,
         "power" => types::AccelMode::Power,
         "motivity" => types::AccelMode::Motivity,
+        "lookup" => types::AccelMode::Lookup,
         _ => types::AccelMode::Noaccel,
     };
 
@@ -362,12 +362,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
 
 pub fn parse_lookup_table(input_string: String) -> Option<Vec<Vec2>> {
     let mut parsed_points = vec![];
-    let points: Vec<&str> = input_string.split(";").collect();
+    let points: Vec<&str> = input_string.trim().split(";").collect();
     for point in points {
         let xy: Vec<&str> = point.split(",").collect();
         if xy.len() == 2 {
-            let x_parsed = unwrap_result_or_return_none!(xy[0].parse::<f64>());
-            let y_parsed = unwrap_result_or_return_none!(xy[1].parse::<f64>());
+            let x_parsed = unwrap_result_or_continue!(xy[0].parse::<f64>());
+            let y_parsed = unwrap_result_or_continue!(xy[1].parse::<f64>());
             parsed_points.push(Vec2 { x: x_parsed, y: y_parsed });
         }
     }
