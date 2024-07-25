@@ -3,13 +3,11 @@ use crate::{
     unwrap_option_or_continue, unwrap_result_or_continue,
 };
 
-const BASE_ARGS_LENGTH: usize = 2;
-
 pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
     let mut accel_args = AccelArgs::default();
 
-    if args.len() < BASE_ARGS_LENGTH {
-        return None;
+    if args.len() < 2 {
+        print_help_and_exit();
     }
 
     accel_args.mode = match args[1].as_str() {
@@ -26,6 +24,9 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
 
     //global args
     for arg in &args {
+        if ["--help", "-h", "--h", "-help", "help"].contains(&arg.as_str()) {
+                print_help_and_exit();
+            }
         let split: (&str, &str) = unwrap_option_or_continue!(arg.split_once("="));
         match &split.0.to_lowercase() as &str {
             "--pointscaling" => {
@@ -381,4 +382,9 @@ pub fn parse_lookup_table(input_string: &str) -> Option<Vec<Vec2>> {
         return None;
     }
     return Some(parsed_points);
+}
+
+fn print_help_and_exit() {
+    println!("{}", include_str!("help_command.txt"));
+    std::process::exit(0);
 }
