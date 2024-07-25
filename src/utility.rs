@@ -1,7 +1,17 @@
 pub const LUT_RAW_DATA_CAPACITY: u32 = 514;
+pub const LUT_POINTS_CAPACITY: u32 = LUT_RAW_DATA_CAPACITY / 2;
 
 pub fn minsd(a: f64, b: f64) -> f64 {
     if a < b {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+
+pub fn maxsd(a: f64, b: f64) -> f64 {
+    if b < a {
         return a;
     } else {
         return b;
