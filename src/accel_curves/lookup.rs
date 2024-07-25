@@ -1,5 +1,7 @@
 use crate::{
-    types::{AccelArgs, Vec2}, unwrap_option_or_return_none, utility::{maxsd, minsd, LUT_POINTS_CAPACITY}
+    types::{AccelArgs, Vec2},
+    unwrap_option_or_return_none,
+    utility::{maxsd, minsd, LUT_POINTS_CAPACITY},
 };
 
 pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {

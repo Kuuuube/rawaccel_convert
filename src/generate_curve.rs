@@ -14,7 +14,10 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             for point in &args.lookup_data {
                 steps_vec.push(point.x);
             }
-            Steps { x_values: steps_vec, step_size: 0.0 }
+            Steps {
+                x_values: steps_vec,
+                step_size: 0.0,
+            }
         }
         (PointScaling::Lookup, _) => {
             let mut steps = step_maker(256, 0.0, (args.dpi / 20) as f64);
@@ -33,35 +36,27 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             }
             crate::types::AccelMode::Jump => crate::jump(curve_step, args),
             crate::types::AccelMode::Natural => crate::natural(curve_step, args),
-            crate::types::AccelMode::Synchronous => {
-                match crate::synchronous(curve_step, args) {
-                    Some(some) => {
-                        previous_point_y = some;
-                        some
-                    },
-                    None => previous_point_y,
+            crate::types::AccelMode::Synchronous => match crate::synchronous(curve_step, args) {
+                Some(some) => {
+                    previous_point_y = some;
+                    some
                 }
+                None => previous_point_y,
             },
             crate::types::AccelMode::Power => crate::power(curve_step, args),
-            crate::types::AccelMode::Motivity => {
-                match crate::motivity(curve_step, args) {
-                    Some(some) => {
-                        previous_point_y = some;
-                        some
-                    },
-                    None => previous_point_y,
+            crate::types::AccelMode::Motivity => match crate::motivity(curve_step, args) {
+                Some(some) => {
+                    previous_point_y = some;
+                    some
                 }
+                None => previous_point_y,
             },
-            crate::types::AccelMode::Lookup => {
-                match crate::lookup(curve_step, args) {
-                    Some(some) => {
-                        previous_point_y = some;
-                        some
-                    },
-                    None => {
-                        previous_point_y
-                    },
+            crate::types::AccelMode::Lookup => match crate::lookup(curve_step, args) {
+                Some(some) => {
+                    previous_point_y = some;
+                    some
                 }
+                None => previous_point_y,
             },
             crate::types::AccelMode::Noaccel => crate::noaccel(curve_step, args),
         };

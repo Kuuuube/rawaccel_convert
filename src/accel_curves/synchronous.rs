@@ -1,7 +1,9 @@
 use std::cmp::min;
 
 use crate::{
-    types::{AccelArgs, FpRepRange}, unwrap_option_or_return_none, utility::{ilogb, lerp, scalbn, LUT_RAW_DATA_CAPACITY}
+    types::{AccelArgs, FpRepRange},
+    unwrap_option_or_return_none,
+    utility::{ilogb, lerp, scalbn, LUT_RAW_DATA_CAPACITY},
 };
 
 pub fn synchronous(x: f64, args: &AccelArgs) -> Option<f64> {
@@ -132,14 +134,21 @@ fn synchronous_gain(x: f64, args: &AccelArgs) -> Option<f64> {
     return Some(y);
 }
 
-fn make_args_data(x: f64, sum: &mut f64, a: &mut f64, velocity: bool, args: &AccelArgs) -> Option<f64> {
+fn make_args_data(
+    x: f64,
+    sum: &mut f64,
+    a: &mut f64,
+    velocity: bool,
+    args: &AccelArgs,
+) -> Option<f64> {
     let b: f64 = x;
     let partitions: i32 = 2;
 
     let interval: f64 = (b - *a) / partitions as f64;
     let mut i = 1;
     while i <= partitions {
-        *sum += unwrap_option_or_return_none!(synchronous_legacy(*a + i as f64 * interval, args)) * interval;
+        *sum += unwrap_option_or_return_none!(synchronous_legacy(*a + i as f64 * interval, args))
+            * interval;
         i += 1;
     }
     *a = b;
