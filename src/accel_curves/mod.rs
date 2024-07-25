@@ -1,5 +1,6 @@
 pub mod classic;
 pub mod jump;
+pub mod motivity;
 pub mod natural;
 pub mod noaccel;
 pub mod power;

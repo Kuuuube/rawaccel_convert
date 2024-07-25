@@ -84,6 +84,14 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 - `--syncspeed` (Default: `5`) The `SyncSpeed` field in rawaccel.
 
+### Motivity
+
+- `--growthrate` (Default: `1`) The `Growth Rate` field in rawaccel.
+
+- `--motivity` (Default: `1.5`) The `Motivity` field in rawaccel.
+
+- `--midpoint` (Default: `5`) The `Midpoint` field in rawaccel.
+
 ### Power
 
 - `--scale` (Default: `1`) The `Scale` field in rawaccel.

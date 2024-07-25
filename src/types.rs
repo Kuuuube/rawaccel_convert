@@ -74,6 +74,7 @@ pub enum AccelMode {
     Synchronous,
     Power,
     //Lookup,
+    Motivity,
     Noaccel,
 }
 

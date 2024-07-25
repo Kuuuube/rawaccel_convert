@@ -19,6 +19,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
         "natural" => types::AccelMode::Natural,
         "synchronous" => types::AccelMode::Synchronous,
         "power" => types::AccelMode::Power,
+        "motivity" => types::AccelMode::Motivity,
         _ => types::AccelMode::Noaccel,
     };
 
@@ -279,6 +280,51 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .1
                             .parse::<f64>()
                             .unwrap_or_else(|_| AccelArgs::default().output_offset)
+                    }
+
+                    _ => {}
+                }
+            }
+        }
+        types::AccelMode::Motivity => {
+            for arg in args {
+                let split: (&str, &str) = unwrap_option_or_continue!(arg.split_once("="));
+                match &split.0.to_lowercase() as &str {
+                    "--sens" => {
+                        accel_args.sens_multiplier = split
+                            .1
+                            .parse::<f64>()
+                            .unwrap_or_else(|_| AccelArgs::default().sens_multiplier)
+                    }
+                    "--gain" => {
+                        accel_args.gain = split
+                            .1
+                            .parse::<bool>()
+                            .unwrap_or_else(|_| AccelArgs::default().gain)
+                    }
+                    "--growthrate" => {
+                        accel_args.gamma = split
+                            .1
+                            .parse::<f64>()
+                            .unwrap_or_else(|_| AccelArgs::default().gamma)
+                    }
+                    "--smooth" => {
+                        accel_args.cap.x = split
+                            .1
+                            .parse::<f64>()
+                            .unwrap_or_else(|_| AccelArgs::default().smooth)
+                    }
+                    "--motivity" => {
+                        accel_args.limit = split
+                            .1
+                            .parse::<f64>()
+                            .unwrap_or_else(|_| AccelArgs::default().motivity)
+                    }
+                    "--midpoint" => {
+                        accel_args.limit = split
+                            .1
+                            .parse::<f64>()
+                            .unwrap_or_else(|_| AccelArgs::default().sync_speed)
                     }
 
                     _ => {}

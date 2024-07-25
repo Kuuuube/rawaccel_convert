@@ -9,5 +9,8 @@ pub fn sensitivity_to_velocity(sensitivity_accel_curve: Vec<Point>) -> Vec<Point
 }
 
 pub fn sensitivity_point_to_velocity(sensitivity_point: Point) -> Point {
-    return Point { x: sensitivity_point.x, y: sensitivity_point.x * sensitivity_point.y };
+    return Point {
+        x: sensitivity_point.x,
+        y: sensitivity_point.x * sensitivity_point.y,
+    };
 }

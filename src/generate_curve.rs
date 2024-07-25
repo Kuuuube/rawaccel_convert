@@ -8,19 +8,20 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
     let curve_steps = match args.point_scaling {
         PointScaling::Libinput | PointScaling::LibinputDebug => {
             step_maker(64, 0.0, (args.dpi / 20) as f64)
-        },
-        _ => {
-            step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64)
-        },
+        }
+        _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
     };
     let mut curve_outputs: Vec<Point> = vec![];
     for curve_step in curve_steps.x_values {
         let output_sens = match args.mode {
-            crate::types::AccelMode::Classic | crate::types::AccelMode::Linear => crate::classic(curve_step, args),
+            crate::types::AccelMode::Classic | crate::types::AccelMode::Linear => {
+                crate::classic(curve_step, args)
+            }
             crate::types::AccelMode::Jump => crate::jump(curve_step, args),
             crate::types::AccelMode::Natural => crate::natural(curve_step, args),
             crate::types::AccelMode::Synchronous => crate::synchronous(curve_step, args),
             crate::types::AccelMode::Power => crate::power(curve_step, args),
+            crate::types::AccelMode::Motivity => crate::motivity(curve_step, args),
             crate::types::AccelMode::Noaccel => crate::noaccel(curve_step, args),
         };
         curve_outputs.push(Point {
@@ -45,7 +46,10 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         }
     }
 
-    return CurvegenResult {points: curve_outputs, step_size: curve_steps.step_size};
+    return CurvegenResult {
+        points: curve_outputs,
+        step_size: curve_steps.step_size,
+    };
 }
 
 fn step_maker(step_count: u32, start: f64, end: f64) -> Steps {
@@ -55,7 +59,10 @@ fn step_maker(step_count: u32, start: f64, end: f64) -> Steps {
         steps.push(utility::lerp(start, end, i as f64 * step_distance));
     }
     let step_size = utility::lerp(start, end, step_distance);
-    return Steps {x_values: steps, step_size: step_size};
+    return Steps {
+        x_values: steps,
+        step_size: step_size,
+    };
 }
 
 //ramer douglas peuker line decimation
