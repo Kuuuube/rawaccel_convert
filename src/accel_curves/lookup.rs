@@ -4,6 +4,9 @@ use crate::{
 };
 
 pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
+    if args.lookup_data.len() < 2 {
+        return 0.0;
+    }
     let capacity = LUT_POINTS_CAPACITY;
 
     let size: i32 = (args.lookup_data.len() * 2) as i32;
