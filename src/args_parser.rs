@@ -1,5 +1,6 @@
 use crate::{
-    types::{self, AccelArgs, CapMode, PointScaling, Vec2}, unwrap_option_or_continue, unwrap_result_or_continue
+    types::{self, AccelArgs, CapMode, PointScaling, Vec2},
+    unwrap_option_or_continue, unwrap_result_or_continue,
 };
 
 const BASE_ARGS_LENGTH: usize = 2;
@@ -343,11 +344,12 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                         accel_args.gain = match split
                             .1
                             .parse::<PointScaling>()
-                            .unwrap_or_else(|_| AccelArgs::default().point_scaling) {
-                                PointScaling::Sens => false,
-                                PointScaling::Velocity => true,
-                                _ => false,
-                            }
+                            .unwrap_or_else(|_| AccelArgs::default().point_scaling)
+                        {
+                            PointScaling::Sens => false,
+                            PointScaling::Velocity => true,
+                            _ => false,
+                        }
                     }
 
                     _ => {}
@@ -368,7 +370,10 @@ pub fn parse_lookup_table(input_string: &str) -> Option<Vec<Vec2>> {
         if xy.len() == 2 {
             let x_parsed = unwrap_result_or_continue!(xy[0].parse::<f64>());
             let y_parsed = unwrap_result_or_continue!(xy[1].parse::<f64>());
-            parsed_points.push(Vec2 { x: x_parsed, y: y_parsed });
+            parsed_points.push(Vec2 {
+                x: x_parsed,
+                y: y_parsed,
+            });
         }
     }
     return Some(parsed_points);

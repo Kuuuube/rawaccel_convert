@@ -1,4 +1,7 @@
-use crate::{types::{AccelArgs, Vec2}, utility::{maxsd, minsd, LUT_POINTS_CAPACITY}};
+use crate::{
+    types::{AccelArgs, Vec2},
+    utility::{maxsd, minsd, LUT_POINTS_CAPACITY},
+};
 
 pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
     let capacity = LUT_POINTS_CAPACITY;
@@ -44,7 +47,6 @@ pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
             }
             return y;
         }
-
     }
 
     let mut y: f64 = points[0].y;
@@ -54,8 +56,7 @@ pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
     return y;
 }
 
-fn lerp(a: f64, b: f64, t: f64) -> f64
-{
+fn lerp(a: f64, b: f64, t: f64) -> f64 {
     let x: f64 = a + t * (b - a);
     if (t > 1.0) == (a < b) {
         return maxsd(x, b);

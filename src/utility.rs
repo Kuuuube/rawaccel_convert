@@ -9,7 +9,6 @@ pub fn minsd(a: f64, b: f64) -> f64 {
     }
 }
 
-
 pub fn maxsd(a: f64, b: f64) -> f64 {
     if b < a {
         return a;
