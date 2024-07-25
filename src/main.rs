@@ -37,9 +37,6 @@ fn main() {
         }
         types::PointScaling::Lookup => {
             for point in curve.points {
-                if point.x == 0.0 {
-                    continue;
-                }
                 print!("{},{};", point.x, point.y);
             }
             print!("\n");
