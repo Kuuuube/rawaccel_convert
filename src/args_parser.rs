@@ -376,5 +376,8 @@ pub fn parse_lookup_table(input_string: &str) -> Option<Vec<Vec2>> {
             });
         }
     }
+    if parsed_points.len() < 2 {
+        return None;
+    }
     return Some(parsed_points);
 }
