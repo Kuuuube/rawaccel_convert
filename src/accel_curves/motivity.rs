@@ -1,11 +1,10 @@
 use std::cmp::min;
 
 use crate::{
-    types::{AccelArgs, FpRepRange},
-    utility::{ilogb, lerp, scalbn, LUT_RAW_DATA_CAPACITY},
+    types::{AccelArgs, FpRepRange}, unwrap_option_or_return_none, utility::{ilogb, lerp, scalbn, LUT_RAW_DATA_CAPACITY}
 };
 
-pub fn motivity(x: f64, args: &AccelArgs) -> f64 {
+pub fn motivity(x: f64, args: &AccelArgs) -> Option<f64> {
     if args.gain {
         return motivity_gain(x, args);
     } else {
@@ -13,7 +12,7 @@ pub fn motivity(x: f64, args: &AccelArgs) -> f64 {
     }
 }
 
-fn motivity_legacy(x: f64, args: &AccelArgs) -> f64 {
+fn motivity_legacy(x: f64, args: &AccelArgs) -> Option<f64> {
     let accel: f64 = args.gamma.exp(); //args.growth_rate.exp()
     let motivity: f64 = 2.0 * args.motivity.ln();
     let midpoint: f64 = args.sync_speed.ln(); //args.midpoint.ln()
@@ -21,10 +20,10 @@ fn motivity_legacy(x: f64, args: &AccelArgs) -> f64 {
 
     //operator
     let denom: f64 = (accel * (midpoint - x.ln())).exp() + 1.0;
-    return (motivity / denom + constant).exp();
+    return Some((motivity / denom + constant).exp());
 }
 
-fn motivity_gain(x: f64, args: &AccelArgs) -> f64 {
+fn motivity_gain(x: f64, args: &AccelArgs) -> Option<f64> {
     let capacity = LUT_RAW_DATA_CAPACITY;
     let velocity: bool = true;
     let range = FpRepRange {
@@ -44,25 +43,25 @@ fn motivity_gain(x: f64, args: &AccelArgs) -> f64 {
         let exp_scale: f64 = scalbn(1.0, e + range.start) / range.num as f64;
         let mut i: i32 = 0;
         while i < range.num {
-            args_data.push(make_args_data(
+            args_data.push(unwrap_option_or_return_none!(make_args_data(
                 (i + range.num) as f64 * exp_scale,
                 &mut sum,
                 &mut a,
                 velocity,
                 &args,
-            ));
+            )));
             i += 1;
         }
         e += 1;
     }
 
-    args_data.push(make_args_data(
+    args_data.push(unwrap_option_or_return_none!(make_args_data(
         scalbn(1.0, range.stop),
         &mut sum,
         &mut a,
         velocity,
         &args,
-    ));
+    )));
 
     //operator
     let data = args_data;
@@ -78,32 +77,32 @@ fn motivity_gain(x: f64, args: &AccelArgs) -> f64 {
 
         if idx < capacity - 1 {
             let mut y: f64 = lerp(
-                data[idx as usize],
-                data[(idx + 1) as usize],
+                unwrap_option_or_return_none!(data.get(idx as usize)).to_owned(),
+                unwrap_option_or_return_none!(data.get((idx + 1) as usize)).to_owned(),
                 idx_f - idx as f64,
             );
             if velocity {
                 y /= x;
             }
-            return y;
+            return Some(y);
         }
     }
 
-    let mut y: f64 = data[0];
+    let mut y: f64 = unwrap_option_or_return_none!(data.get(0)).to_owned();
     if velocity {
         y /= x_start;
     }
-    return y;
+    return Some(y);
 }
 
-fn make_args_data(x: f64, sum: &mut f64, a: &mut f64, velocity: bool, args: &AccelArgs) -> f64 {
+fn make_args_data(x: f64, sum: &mut f64, a: &mut f64, velocity: bool, args: &AccelArgs) -> Option<f64> {
     let b: f64 = x;
     let partitions: i32 = 2;
 
     let interval: f64 = (b - *a) / partitions as f64;
     let mut i = 1;
     while i <= partitions {
-        *sum += motivity_legacy(*a + i as f64 * interval, args) * interval;
+        *sum += unwrap_option_or_return_none!(motivity_legacy(*a + i as f64 * interval, args)) * interval;
         i += 1;
     }
     *a = b;
@@ -111,5 +110,5 @@ fn make_args_data(x: f64, sum: &mut f64, a: &mut f64, velocity: bool, args: &Acc
     if !velocity {
         y /= x;
     }
-    return y;
+    return Some(y);
 }

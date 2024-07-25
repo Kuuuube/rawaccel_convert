@@ -20,9 +20,25 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             }
             crate::types::AccelMode::Jump => crate::jump(curve_step, args),
             crate::types::AccelMode::Natural => crate::natural(curve_step, args),
-            crate::types::AccelMode::Synchronous => crate::synchronous(curve_step, args),
+            crate::types::AccelMode::Synchronous => {
+                match crate::synchronous(curve_step, args) {
+                    Some(some) => {
+                        previous_point_y = some;
+                        some
+                    },
+                    None => previous_point_y,
+                }
+            },
             crate::types::AccelMode::Power => crate::power(curve_step, args),
-            crate::types::AccelMode::Motivity => crate::motivity(curve_step, args),
+            crate::types::AccelMode::Motivity => {
+                match crate::motivity(curve_step, args) {
+                    Some(some) => {
+                        previous_point_y = some;
+                        some
+                    },
+                    None => previous_point_y,
+                }
+            },
             crate::types::AccelMode::Lookup => {
                 match crate::lookup(curve_step, args) {
                     Some(some) => {
