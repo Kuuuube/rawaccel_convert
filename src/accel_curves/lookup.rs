@@ -1,11 +1,10 @@
 use crate::{
-    types::{AccelArgs, Vec2},
-    utility::{maxsd, minsd, LUT_POINTS_CAPACITY},
+    types::{AccelArgs, Vec2}, unwrap_option_or_return_none, utility::{maxsd, minsd, LUT_POINTS_CAPACITY}
 };
 
-pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
+pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
     if args.lookup_data.len() < 2 {
-        return 0.0;
+        return None;
     }
     let capacity = LUT_POINTS_CAPACITY;
 
@@ -19,13 +18,13 @@ pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
     let mut hi: i32 = size - 2;
 
     if x <= 0.0 {
-        return 0.0;
+        return Some(0.0);
     }
 
     if (hi as i64) < ((capacity - 1) as i64) {
         while lo <= hi {
             let mid: i32 = (lo + hi) / 2;
-            let p: Vec2 = points[mid as usize];
+            let p: Vec2 = unwrap_option_or_return_none!(points.get(mid as usize)).to_owned();
 
             if x < p.x {
                 hi = mid - 1;
@@ -36,27 +35,30 @@ pub fn lookup(x: f64, args: &AccelArgs) -> f64 {
                 if velocity {
                     y /= x;
                 }
-                return y;
+                return Some(y);
             }
         }
 
         if lo > 0 {
-            let a: Vec2 = points[(lo - 1) as usize];
-            let b: Vec2 = points[lo as usize];
+            let a: Vec2 = unwrap_option_or_return_none!(points.get((lo - 1) as usize)).to_owned();
+            let b: Vec2 = unwrap_option_or_return_none!(points.get(lo as usize)).to_owned();
             let t: f64 = (x - a.x) / (b.x - a.x);
             let mut y: f64 = lerp(a.y, b.y, t);
             if velocity {
                 y /= x;
             }
-            return y;
+            return Some(y);
         }
     }
 
-    let mut y: f64 = points[0].y;
-    if velocity {
-        y /= points[0].x;
+    if points.len() < 1 {
+        return None;
     }
-    return y;
+    let mut y: f64 = unwrap_option_or_return_none!(points.get(0)).y;
+    if velocity {
+        y /= unwrap_option_or_return_none!(points.get(0)).x;
+    }
+    return Some(y);
 }
 
 fn lerp(a: f64, b: f64, t: f64) -> f64 {

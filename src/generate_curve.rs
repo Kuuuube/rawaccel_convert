@@ -12,6 +12,7 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
     };
     let mut curve_outputs: Vec<Point> = vec![];
+    let mut previous_point_y: f64 = Default::default();
     for curve_step in curve_steps.x_values {
         let output_sens = match args.mode {
             crate::types::AccelMode::Classic | crate::types::AccelMode::Linear => {
@@ -22,7 +23,15 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             crate::types::AccelMode::Synchronous => crate::synchronous(curve_step, args),
             crate::types::AccelMode::Power => crate::power(curve_step, args),
             crate::types::AccelMode::Motivity => crate::motivity(curve_step, args),
-            crate::types::AccelMode::Lookup => crate::lookup(curve_step, args),
+            crate::types::AccelMode::Lookup => {
+                match crate::lookup(curve_step, args) {
+                    Some(some) => {
+                        previous_point_y = some;
+                        some
+                    },
+                    None => previous_point_y,
+                }
+            },
             crate::types::AccelMode::Noaccel => crate::noaccel(curve_step, args),
         };
         curve_outputs.push(Point {

@@ -151,7 +151,7 @@ impl FpRepRange {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 pub struct Point {
     pub x: f64,
     pub y: f64,
