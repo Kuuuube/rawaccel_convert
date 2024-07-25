@@ -1,13 +1,20 @@
 use crate::{
     convert_curve,
-    types::{AccelArgs, CurvegenResult, Point, PointScaling, Steps},
+    types::{AccelArgs, AccelMode, CurvegenResult, Point, PointScaling, Steps},
     utility::{self, lerp},
 };
 
 pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
-    let curve_steps = match args.point_scaling {
-        PointScaling::Libinput | PointScaling::LibinputDebug => {
+    let curve_steps = match (&args.point_scaling, &args.mode) {
+        (PointScaling::Libinput | PointScaling::LibinputDebug, _) => {
             step_maker(64, 0.0, (args.dpi / 20) as f64)
+        }
+        (PointScaling::Sens | PointScaling::Velocity | PointScaling::Gain, AccelMode::Lookup) => {
+            let mut steps_vec = vec![];
+            for point in &args.lookup_data {
+                steps_vec.push(point.x);
+            }
+            Steps { x_values: steps_vec, step_size: 0.0 }
         }
         _ => step_maker(args.point_count * 100, 0.0, (args.dpi / 20) as f64),
     };
@@ -45,7 +52,9 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
                         previous_point_y = some;
                         some
                     },
-                    None => previous_point_y,
+                    None => {
+                        previous_point_y
+                    },
                 }
             },
             crate::types::AccelMode::Noaccel => crate::noaccel(curve_step, args),
