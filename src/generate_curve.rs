@@ -1,6 +1,6 @@
 use crate::{
     convert_curve,
-    types::{AccelArgs, AccelMode, CurvegenResult, Point, PointScaling, Steps},
+    types::{AccelArgs, CurvegenResult, Point, PointScaling, Steps},
     utility::{self, lerp},
 };
 
