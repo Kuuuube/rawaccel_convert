@@ -5,7 +5,7 @@ use crate::{
 pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
     let capacity = LUT_POINTS_CAPACITY;
 
-    let size: i32 = (args.lookup_data.len() * 2) as i32;
+    let size: i32 = (args.lookup_data.len() / 2) as i32;
     let velocity: bool = args.gain;
 
     //operator
