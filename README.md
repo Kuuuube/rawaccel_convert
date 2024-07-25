@@ -5,7 +5,7 @@ Tool for converting rawaccel curve settings to points. GUI version: [Rawaccel Co
 # CLI
 
 ```
-rawaccel_convert CURVE_TYPE
+rawaccel_convert CURVE_TYPE [OPTIONS]...
 ```
 
 Filling all arguments is not required. Some curves conditionally change what they use based on other variables (ex: the `Cap Type`).
