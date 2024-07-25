@@ -340,10 +340,14 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                             .unwrap_or_else(|| AccelArgs::default().lookup_data)
                     }
                     "--applyas" => {
-                        accel_args.point_scaling = split
+                        accel_args.gain = match split
                             .1
                             .parse::<PointScaling>()
-                            .unwrap_or_else(|_| AccelArgs::default().point_scaling)
+                            .unwrap_or_else(|_| AccelArgs::default().point_scaling) {
+                                PointScaling::Sens => false,
+                                PointScaling::Velocity => true,
+                                _ => false,
+                            }
                     }
 
                     _ => {}
