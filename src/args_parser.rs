@@ -364,7 +364,7 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
 }
 
 pub fn parse_lookup_table(input_string: &str) -> Option<Vec<Vec2>> {
-    let mut parsed_points = vec![Vec2 { x: 0.0, y: 0.0 }];
+    let mut parsed_points = vec![];
     let newlines_stripped = input_string.replace("\n", "").replace(" ", "");
     let points: Vec<&str> = newlines_stripped.trim().split(";").collect();
     for point in points {
