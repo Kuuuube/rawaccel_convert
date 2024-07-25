@@ -22,6 +22,7 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
             crate::types::AccelMode::Synchronous => crate::synchronous(curve_step, args),
             crate::types::AccelMode::Power => crate::power(curve_step, args),
             crate::types::AccelMode::Motivity => crate::motivity(curve_step, args),
+            crate::types::AccelMode::Lookup => crate::lookup(curve_step, args),
             crate::types::AccelMode::Noaccel => crate::noaccel(curve_step, args),
         };
         curve_outputs.push(Point {

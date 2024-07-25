@@ -21,6 +21,8 @@ pub struct AccelArgs {
 
     pub sens_multiplier: f64,
 
+    pub lookup_data: Vec<Vec2>,
+
     pub point_count: u32,
     pub point_scaling: PointScaling,
     pub dpi: u32,
@@ -50,6 +52,8 @@ impl Default for AccelArgs {
             cap_mode: CapMode::Output,
             sens_multiplier: 1.0,
 
+            lookup_data: vec![],
+
             point_count: 64,
             point_scaling: PointScaling::Sens,
             dpi: 1200,
@@ -73,7 +77,7 @@ pub enum AccelMode {
     Natural,
     Synchronous,
     Power,
-    //Lookup,
+    Lookup,
     Motivity,
     Noaccel,
 }

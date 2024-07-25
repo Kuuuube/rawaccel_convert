@@ -1,5 +1,6 @@
 use accel_curves::classic::classic;
 use accel_curves::jump::jump;
+use accel_curves::lookup::lookup;
 use accel_curves::motivity::motivity;
 use accel_curves::natural::natural;
 use accel_curves::noaccel::noaccel;

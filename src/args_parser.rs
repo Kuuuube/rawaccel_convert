@@ -1,6 +1,6 @@
 use crate::{
-    types::{self, AccelArgs, CapMode, PointScaling},
-    unwrap_option_or_continue,
+    types::{self, AccelArgs, CapMode, PointScaling, Vec2},
+    unwrap_option_or_continue, unwrap_result_or_return_none,
 };
 
 const BASE_ARGS_LENGTH: usize = 2;
@@ -331,8 +331,41 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
                 }
             }
         }
+        types::AccelMode::Lookup => {
+            for arg in args {
+                let split: (&str, &str) = unwrap_option_or_continue!(arg.split_once("="));
+                match &split.0.to_lowercase() as &str {
+                    "--points" => {
+                        accel_args.lookup_data = parse_lookup_table(split.1.to_owned())
+                            .unwrap_or_else(|| AccelArgs::default().lookup_data)
+                    }
+                    "--applyas" => {
+                        accel_args.point_scaling = split
+                            .1
+                            .parse::<PointScaling>()
+                            .unwrap_or_else(|_| AccelArgs::default().point_scaling)
+                    }
+
+                    _ => {}
+                }
+            }
+        }
         types::AccelMode::Noaccel => {}
     }
 
     return Some(accel_args);
+}
+
+pub fn parse_lookup_table(input_string: String) -> Option<Vec<Vec2>> {
+    let mut parsed_points = vec![];
+    let points: Vec<&str> = input_string.split(";").collect();
+    for point in points {
+        let xy: Vec<&str> = point.split(",").collect();
+        if xy.len() == 2 {
+            let x_parsed = unwrap_result_or_return_none!(xy[0].parse::<f64>());
+            let y_parsed = unwrap_result_or_return_none!(xy[1].parse::<f64>());
+            parsed_points.push(Vec2 { x: x_parsed, y: y_parsed });
+        }
+    }
+    return Some(parsed_points);
 }
