@@ -9,16 +9,6 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         (PointScaling::Libinput | PointScaling::LibinputDebug, _) => {
             step_maker(64, 0.0, (args.dpi / 20) as f64)
         }
-        (PointScaling::Sens | PointScaling::Velocity | PointScaling::Gain, AccelMode::Lookup) => {
-            let mut steps_vec = vec![];
-            for point in &args.lookup_data {
-                steps_vec.push(point.x);
-            }
-            Steps {
-                x_values: steps_vec,
-                step_size: 0.0,
-            }
-        }
         (PointScaling::Lookup, _) => {
             let mut steps = step_maker(256, 0.0, (args.dpi / 20) as f64);
             steps.x_values.remove(0);
@@ -66,10 +56,10 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         });
     }
     match args.point_scaling {
-        PointScaling::Libinput | PointScaling::LibinputDebug => {
+        PointScaling::Libinput | PointScaling::LibinputDebug | PointScaling::Lookup => {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
         }
-        PointScaling::Velocity | PointScaling::Lookup => {
+        PointScaling::Velocity => {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
             if args.optimize_curve {
                 curve_outputs = optimized_decimation(curve_outputs, args.point_count);
