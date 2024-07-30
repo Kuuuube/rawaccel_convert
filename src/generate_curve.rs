@@ -56,11 +56,10 @@ pub fn generate_curve(args: &AccelArgs) -> CurvegenResult {
         });
     }
     match args.point_scaling {
-        PointScaling::Libinput | PointScaling::LibinputDebug | PointScaling::LookupVelocity => {
+        PointScaling::Libinput | PointScaling::LibinputDebug => {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
         }
-        PointScaling::LookupSens => {}
-        PointScaling::Velocity => {
+        PointScaling::Velocity | PointScaling::LookupVelocity => {
             curve_outputs = convert_curve::sensitivity_to_velocity(curve_outputs);
             if args.optimize_curve {
                 curve_outputs = optimized_decimation(curve_outputs, args.point_count);
