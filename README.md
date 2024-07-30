@@ -27,7 +27,7 @@ These args apply regardless of the curve type you select.
 
     The `lookupvelocity` option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
 
-    The `lookupsens` option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
+    The `lookupsens` option outputs in the format of rawaccel's Look Up Table curve with the sens setting.
 
 - `--pointcount` (Default: `64`): The number of points to include in the output.
 

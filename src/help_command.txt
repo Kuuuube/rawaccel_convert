@@ -15,7 +15,7 @@ These args apply regardless of the curve type you select.
         Libinput uses libinput. [Libinput custom accel curve setup](./docs/libinput.md).
         To output libinput values matching the format of velocity use libinputdebug. The output of libinputdebug cannot be used in libinput directly.
         The lookupvelocity option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
-        The lookupsens option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
+        The lookupsens option outputs in the format of rawaccel's Look Up Table curve with the sens setting.
     --pointcount (Default: 64): The number of points to include in the output.
         The maximum points libinput allows is 64.
     --dpi (Default: 1200): Your mouse DPI. Controls the max input speed to calculate for.
