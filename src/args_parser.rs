@@ -25,8 +25,8 @@ pub fn parser(args: Vec<String>) -> Option<AccelArgs> {
     //global args
     for arg in &args {
         if ["--help", "-h", "--h", "-help", "help"].contains(&arg.as_str()) {
-                print_help_and_exit();
-            }
+            print_help_and_exit();
+        }
         let split: (&str, &str) = unwrap_option_or_continue!(arg.split_once("="));
         match &split.0.to_lowercase() as &str {
             "--pointscaling" => {

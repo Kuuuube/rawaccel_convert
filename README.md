@@ -17,7 +17,7 @@ Filling all arguments is not required. Some curves conditionally change what the
 
 These args apply regardless of the curve type you select.
 
-- `--pointscaling` (Default: `sens`): `sens`, `velocity`, `libinput`, `libinputdebug`, or `lookup`.
+- `--pointscaling` (Default: `sens`): `sens`, `velocity`, `libinput`, `libinputdebug`, `lookupvelocity`, or `lookupsens`.
 
     Rawaccel's first graph uses `sens`, the second graph uses `velocity`.
 
@@ -25,7 +25,9 @@ These args apply regardless of the curve type you select.
 
     To output libinput values matching the format of `velocity` use `libinputdebug`. The output of `libinputdebug` cannot be used in libinput directly.
 
-    The `lookup` option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
+    The `lookupvelocity` option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
+
+    The `lookupsens` option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
 
 - `--pointcount` (Default: `64`): The number of points to include in the output.
 

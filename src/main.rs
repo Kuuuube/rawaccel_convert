@@ -35,9 +35,15 @@ fn main() {
             println!("Libinput Step:\n{}", curve.step_size);
             println!("Points:\n{:?}", curve.points);
         }
-        types::PointScaling::Lookup => {
+        types::PointScaling::LookupVelocity => {
             for point in curve.points {
-                print!("{},{};", point.x, point.y);
+                print!("{},{};\n", point.x, point.y);
+            }
+            print!("\n");
+        }
+        types::PointScaling::LookupSens => {
+            for point in curve.points {
+                print!("{},{};\n", point.x, point.y);
             }
             print!("\n");
         }

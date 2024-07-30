@@ -10,11 +10,12 @@ Warning: All arguments except CURVE_TYPE are long options and must be used in --
 
 Global:
 These args apply regardless of the curve type you select.
-    --pointscaling (Default: sens): sens, velocity, libinput, libinputdebug, or lookup.
+    --pointscaling (Default: sens): sens, velocity, libinput, libinputdebug, lookupvelocity, lookupsens.
         Rawaccel's first graph uses sens, the second graph uses velocity.
         Libinput uses libinput. [Libinput custom accel curve setup](./docs/libinput.md).
         To output libinput values matching the format of velocity use libinputdebug. The output of libinputdebug cannot be used in libinput directly.
-        The lookup option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
+        The lookupvelocity option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
+        The lookupsens option outputs in the format of rawaccel's Look Up Table curve with the velocity setting.
     --pointcount (Default: 64): The number of points to include in the output.
         The maximum points libinput allows is 64.
     --dpi (Default: 1200): Your mouse DPI. Controls the max input speed to calculate for.
