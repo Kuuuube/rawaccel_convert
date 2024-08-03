@@ -161,4 +161,8 @@ Applying a custom accel curve with libinput.
 
 ## Other Wayland
 
+There is no global way to set custom accel curves in Wayland. There are many compositors which I am unaware of how to set custom curves on.
+
+If you know how to set a curve for a compositor not listed here, please contact me through github issues or make a PR on this repo adding a method for this.
+
 Libinput pointer acceleration docs: https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html
