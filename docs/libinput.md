@@ -103,8 +103,62 @@ Applying a custom accel curve with libinput.
     xinput set-prop {mouse_id} "libinput Accel Custom Motion Points" 0.0, 1.0
     ```
 
-## Wayland
+## Hyprland
 
-I'm currently unaware of any methods for applying a custom accel curve on wayland. If you know how, please contact me through github issues or make a PR on this repo adding a method for this.
+### Applying to all devices
+
+1. Set the following setting in the input section of your config file:
+
+    ```
+    input {
+        accel_profile = custom {libinput_step} {accel_points}
+        ...
+    }
+    ```
+
+    **Replace `{libinput_step}` and `{accel_points}` with the output of `rawaccel_convert` with `--pointscaling=libinput` flag or the steps box in the GUI.**
+
+2. It should automatically reload and apply your settings. If it does not, run:
+
+    ```
+    hyprctl reload
+    ```
+
+### Applying to a single device
+
+1. List your device names:
+
+    ```
+    hyprctl devices
+    ```
+
+2. Set the following setting in the input section of your config file:
+
+    ```
+    device:{device_name} {
+        accel_profile = custom {libinput_step} {accel_points}
+        ...
+    }
+    ```
+
+    **Replace `{device_name}` with your device's name.**
+
+3. It should automatically reload and apply your settings. If it does not, run:
+
+    ```
+    hyprctl reload
+    ```
+
+### Reverting these changes
+
+1. Remove the code added to the config file in the above steps.
+
+2. It should automatically reload and apply your settings. If it does not, run:
+
+    ```
+    hyprctl reload
+    ```
+
+## Other Wayland
 
 Libinput pointer acceleration docs: https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html
