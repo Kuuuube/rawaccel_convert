@@ -80,6 +80,36 @@ Applying a custom accel curve with libinput.
     xinput set-prop 15 "libinput Rotation Angle" 90
     ```
 
+### Making these changes permanent
+
+After you have verified that your curve works how you want and nothing is broken, there are two ways to make it permanent:
+
+- Make a script to run at startup that runs the same commands you ran when setting up your curve.
+
+OR
+
+- Set your accel in the X11 config file:
+
+    1. Make a file with the following contents:
+
+        ```
+        Section "InputClass"
+            Identifier "rawaccel_convert accel curve"
+            Driver "libinput"
+            MatchIsPointer "yes"
+
+            Option "AccelProfile" "custom"
+            Option "AccelStepMotion" "{libinput_step}"
+            Option "AccelPointsMotion" "{accel_points}"
+        EndSection
+        ```
+
+        **Replace `{libinput_step}` and `{accel_points}` with the output of `rawaccel_convert` with `--pointscaling=libinput` flag or the steps box in the GUI.**
+
+    2. Save it here: `/etc/X11/xorg.conf.d/50-mouse-acceleration.conf`
+
+For more options see: https://man.archlinux.org/man/libinput.4
+
 ### Reverting these changes
 
 
