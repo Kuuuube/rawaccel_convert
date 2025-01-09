@@ -2,7 +2,6 @@ use std::cmp::min;
 
 use crate::{
     types::{AccelArgs, FpRepRange},
-    unwrap_option_or_return_none,
     utility::{ilogb, lerp, scalbn, LUT_RAW_DATA_CAPACITY},
 };
 
@@ -82,25 +81,25 @@ fn synchronous_gain(x: f64, args: &AccelArgs) -> Option<f64> {
         let exp_scale: f64 = scalbn(1.0, e + range.start) / range.num as f64;
         let mut i: i32 = 0;
         while i < range.num {
-            args_data.push(unwrap_option_or_return_none!(make_args_data(
+            args_data.push(make_args_data(
                 (i + range.num) as f64 * exp_scale,
                 &mut sum,
                 &mut a,
                 velocity,
                 &args,
-            )));
+            )?);
             i += 1;
         }
         e += 1;
     }
 
-    args_data.push(unwrap_option_or_return_none!(make_args_data(
+    args_data.push(make_args_data(
         scalbn(1.0, range.stop),
         &mut sum,
         &mut a,
         velocity,
         &args,
-    )));
+    )?);
 
     //operator
     let data = args_data;
@@ -116,8 +115,8 @@ fn synchronous_gain(x: f64, args: &AccelArgs) -> Option<f64> {
 
         if idx < capacity - 1 {
             let mut y: f64 = lerp(
-                unwrap_option_or_return_none!(data.get(idx as usize)).to_owned(),
-                unwrap_option_or_return_none!(data.get((idx + 1) as usize)).to_owned(),
+                data.get(idx as usize)?.to_owned(),
+                data.get((idx + 1) as usize)?.to_owned(),
                 idx_f - idx as f64,
             );
             if velocity {
@@ -127,7 +126,7 @@ fn synchronous_gain(x: f64, args: &AccelArgs) -> Option<f64> {
         }
     }
 
-    let mut y: f64 = unwrap_option_or_return_none!(data.get(0)).to_owned();
+    let mut y: f64 = data.get(0)?.to_owned();
     if velocity {
         y /= x_start;
     }
@@ -147,8 +146,7 @@ fn make_args_data(
     let interval: f64 = (b - *a) / partitions as f64;
     let mut i = 1;
     while i <= partitions {
-        *sum += unwrap_option_or_return_none!(synchronous_legacy(*a + i as f64 * interval, args))
-            * interval;
+        *sum += synchronous_legacy(*a + i as f64 * interval, args)? * interval;
         i += 1;
     }
     *a = b;

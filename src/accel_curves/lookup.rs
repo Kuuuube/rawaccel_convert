@@ -1,6 +1,5 @@
 use crate::{
     types::{AccelArgs, Vec2},
-    unwrap_option_or_return_none,
     utility::{maxsd, minsd, LUT_POINTS_CAPACITY},
 };
 
@@ -23,7 +22,7 @@ pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
     if (hi as i64) < ((capacity - 1) as i64) {
         while lo <= hi {
             let mid: i32 = (lo + hi) / 2;
-            let p: Vec2 = unwrap_option_or_return_none!(points.get(mid as usize)).to_owned();
+            let p: Vec2 = points.get(mid as usize)?.to_owned();
 
             if x < p.x {
                 hi = mid - 1;
@@ -39,8 +38,8 @@ pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
         }
 
         if lo > 0 {
-            let a: Vec2 = unwrap_option_or_return_none!(points.get((lo - 1) as usize)).to_owned();
-            let b: Vec2 = unwrap_option_or_return_none!(points.get(lo as usize)).to_owned();
+            let a: Vec2 = points.get((lo - 1) as usize)?.to_owned();
+            let b: Vec2 = points.get(lo as usize)?.to_owned();
             let t: f64 = (x - a.x) / (b.x - a.x);
             let mut y: f64 = lerp(a.y, b.y, t);
             if velocity {
@@ -50,9 +49,9 @@ pub fn lookup(x: f64, args: &AccelArgs) -> Option<f64> {
         }
     }
 
-    let mut y: f64 = unwrap_option_or_return_none!(points.get(0)).y;
+    let mut y: f64 = points.get(0)?.y;
     if velocity {
-        y /= unwrap_option_or_return_none!(points.get(0)).x;
+        y /= points.get(0)?.x;
     }
     return Some(y);
 }
