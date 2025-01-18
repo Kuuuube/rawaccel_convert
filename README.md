@@ -137,3 +137,29 @@ Note: Motivity has been superceded by `Synchronous`
 ```
 rawaccel_convert classic --sens=0.25 --accel=0.0315 --captype=input --capin=34 --power=2.5 --dpi=1600
 ```
+
+# For Developers
+
+Rawaccel Convert doubles as a crate that can be added as a dependency to your Rust projects.
+
+This project is zero-depenency and only requires the Rust std and core language features. Because of this, it will barely add any extra compile time to your project.
+
+Due to it not being published on [crates.io](https://crates.io/), adding the crate is a little different from most. Simply add the git repo and commit hash to your `Cargo.toml`.
+
+## Examples
+
+Replace `COMMIT_HASH_GOES_HERE` with the commit hash you wish to use.
+
+```
+[dependencies]
+rawaccel_convert = { git = "https://github.com/Kuuuube/rawaccel_convert.git", rev = "COMMIT_HASH_GOES_HERE" }
+```
+
+For example, to use version `0.1.3` the commit hash is `1b090cb684fc47d211ef5c6d1985572fb338ebc9`:
+
+```
+[dependencies]
+rawaccel_convert = { git = "https://github.com/Kuuuube/rawaccel_convert.git", rev = "1b090cb684fc47d211ef5c6d1985572fb338ebc9" }
+```
+
+To see a working project that uses `rawaccel_convert` as a dependency, check out [Rawaccel Convert GUI](https://github.com/Kuuuube/rawaccel-convert-gui).
